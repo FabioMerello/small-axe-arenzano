@@ -18,6 +18,7 @@ export function Footer() {
             Via Bocca 12, 16011 Arenzano (GE)
           </p>
           <p className="text-sm text-muted-foreground mt-2">Mar–Dom · 17:00 – 02:00</p>
+          <a href="tel:+393737965678" className="text-sm text-primary hover:underline mt-2 inline-block">373 796 5678</a>
         </div>
         <div>
           <h4 className="font-display tracking-wider text-foreground mb-3">Seguici</h4>
