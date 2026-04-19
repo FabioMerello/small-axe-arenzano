@@ -7,6 +7,7 @@ const links = [
   { to: "/menu", label: "Menu" },
   { to: "/eventi", label: "Eventi" },
   { to: "/contatti", label: "Contatti" },
+  { to: "/admin", label: "Gestore" },
 ] as const;
 
 export function Header() {
