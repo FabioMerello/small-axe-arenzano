@@ -26,9 +26,12 @@ export function Footer() {
             <a href="#" aria-label="Instagram" className="h-10 w-10 grid place-items-center rounded-full border border-border hover:border-primary hover:text-primary transition"><Instagram className="h-4 w-4" /></a>
             <a href="#" aria-label="Facebook" className="h-10 w-10 grid place-items-center rounded-full border border-border hover:border-primary hover:text-primary transition"><Facebook className="h-4 w-4" /></a>
           </div>
-          <div className="mt-6 text-xs text-muted-foreground/70 flex gap-4">
+          <div className="mt-6 text-xs text-muted-foreground/70 flex flex-wrap gap-x-4 gap-y-2">
             <Link to="/contatti" className="hover:text-primary">Contatti</Link>
             <Link to="/menu" className="hover:text-primary">Menu</Link>
+            <Link to="/privacy" className="hover:text-primary">Privacy</Link>
+            <Link to="/cookies" className="hover:text-primary">Cookie</Link>
+            <Link to="/termini" className="hover:text-primary">Termini</Link>
           </div>
         </div>
       </div>
