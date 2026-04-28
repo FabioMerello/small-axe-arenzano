@@ -1,7 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import heroPub from "@/assets/hero-pub.jpg";
 import beer from "@/assets/beer.jpg";
+import pub1 from "@/assets/pub-1.jpg";
+import pub2 from "@/assets/pub-2.jpg";
+import pub3 from "@/assets/pub-3.jpg";
 import { Beer, Music, MapPin, ArrowRight } from "lucide-react";
+
+const carouselImages = [pub1, pub2, pub3];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -105,17 +111,58 @@ function Index() {
 
       {/* CTA */}
       <section className="mx-auto max-w-5xl px-6 py-24">
-        <div className="rounded-2xl bg-gradient-amber p-12 md:p-20 text-center shadow-glow">
-          <h2 className="font-display text-4xl md:text-6xl text-primary-foreground">Ti aspettiamo stasera.</h2>
-          <p className="mt-4 text-primary-foreground/80 text-lg">Mar–Dom · dalle 17:00 alle 02:00</p>
-          <Link
-            to="/contatti"
-            className="mt-8 inline-flex items-center gap-2 rounded-md bg-background px-8 py-4 font-display tracking-wider text-foreground hover:bg-card transition"
-          >
-            Come raggiungerci <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
+        <CtaCarousel />
       </section>
     </>
+  );
+}
+
+function CtaCarousel() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % carouselImages.length);
+    }, 5000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className="relative overflow-hidden rounded-2xl shadow-glow h-[500px] md:h-[560px]">
+      {carouselImages.map((src, i) => (
+        <img
+          key={src}
+          src={src}
+          alt="Atmosfera Small Axe Pub"
+          width={1600}
+          height={900}
+          loading="lazy"
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${i === index ? "opacity-100" : "opacity-0"}`}
+        />
+      ))}
+      <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-background/30" />
+
+      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
+        <h2 className="font-display text-4xl md:text-6xl text-foreground drop-shadow-lg">Ti aspettiamo stasera.</h2>
+        <p className="mt-4 text-foreground/90 text-lg drop-shadow">Mar–Dom · dalle 17:00 alle 02:00</p>
+        <Link
+          to="/contatti"
+          className="mt-8 inline-flex items-center gap-2 rounded-md bg-gradient-amber px-8 py-4 font-display tracking-wider text-primary-foreground hover:opacity-90 transition shadow-glow"
+        >
+          Come raggiungerci <ArrowRight className="h-4 w-4" />
+        </Link>
+      </div>
+
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+        {carouselImages.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIndex(i)}
+            aria-label={`Vai a immagine ${i + 1}`}
+            className={`h-2 rounded-full transition-all ${i === index ? "w-8 bg-primary" : "w-2 bg-foreground/40 hover:bg-foreground/70"}`}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
